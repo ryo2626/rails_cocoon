@@ -1,0 +1,15 @@
+
+<div class="nested-fields">
+  <%= f.text_field :name %>
+  <%= link_to_remove_association "子供を削除", f %>
+
+  <div class="grandchildren">
+    <%= f.fields_for :grandchildren do |form| %>
+      <%= form.label "孫" %>
+      <%= render "grandchild_fields", f: form %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "孫を追加", f, :grandchildren %>
+    </div>
+  </div>
+</div>

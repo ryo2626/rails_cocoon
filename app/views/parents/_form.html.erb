@@ -1,0 +1,32 @@
+<%= form_with(model: parent, local: true) do |form| %>
+  <% if parent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(parent.errors.count, "error") %> prohibited this parent from being saved:</h2>
+
+      <ul>
+      <% parent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="children">
+  <%= form.fields_for :children do |f| %>
+    <%= f.label "子" %>
+    <%= render "child_fields", f: f %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association "子供を追加", form, :children %>
+  </div>
+</div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
